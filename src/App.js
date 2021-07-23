@@ -18,7 +18,7 @@ function App() {
                   key={index}
                   path={item.path}
                   loginRequired={item.loginRequired}
-                  exact={item.expect}
+                  exact={item.exact}
                 >
                   <item.component />
                 </PrivateRoute>

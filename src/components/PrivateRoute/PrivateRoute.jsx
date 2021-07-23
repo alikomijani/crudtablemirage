@@ -8,16 +8,13 @@ function PrivateRoute({ loginRequired, path, exact, children }) {
             path={path}
             exact={exact}
             render={({ location }) =>
-                (!loginRequired) || (loginRequired && isLogin) ? (
+                (loginRequired && !isLogin) ? (<Redirect
+                    to={{
+                        pathname: "/login",
+                        state: { from: location }
+                    }}
+                />) :
                     children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/login",
-                            state: { from: location }
-                        }}
-                    />
-                )
             }
         />
     )

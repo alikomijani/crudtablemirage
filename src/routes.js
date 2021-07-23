@@ -8,16 +8,16 @@ const CreateUser = React.lazy(() => import("./pages/CreateUser/CreateUser"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
 
 const routes = [
-  { path: "/login", expect: true, component: Login, loginRequired: false },
-  { path: "/", expect: true, component: UsersList, loginRequired: true },
+  { path: "/login", exact: true, component: Login, loginRequired: false },
+  { path: "/", exact: true, component: UsersList, loginRequired: true },
   {
     path: "/:id(\\d+)",
-    expect: true,
+    exact: true,
     component: UserProfile,
     loginRequired: true,
   },
-  { path: "/create", expect: true, component: CreateUser, loginRequired: true },
-  { path: "/test", expect: true, component: Test, loginRequired: true },
+  { path: "/create", exact: true, component: CreateUser, loginRequired: true },
+  { path: "/test", exact: true, component: Test, loginRequired: true },
 ];
 
 export default routes;
