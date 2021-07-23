@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import './userprofile.style.css'
 import { useParams } from 'react-router'
 
@@ -9,16 +10,29 @@ function UserProfile() {
     const [error, setError] = React.useState(false)
 
     React.useEffect(() => {
-        fetch(`api/users/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setUser(data.user)
-            }).catch(e => {
+        axios.get(`api/users/${id}`)
+            .then(res => {
+                setUser(res.data.user)
+            })
+            .catch((e) => {
                 console.log(e);
                 console.log(e.message);
                 setError(true)
             }).finally(() => setLoading(false))
+        // 200
+        // 300
+        // 400
+        // 500
+        // fetch(`api/users/${id}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         setUser(data.user)
+        //     }).catch(e => {
+        //         console.log(e);
+        //         console.log(e.message);
+        //         setError(true)
+        //     }).finally(() => setLoading(false))
     }, [id])
 
     if (loading) return (<div>...loading</div>)
@@ -47,7 +61,7 @@ function UserProfile() {
                                         <div className="row">
                                             <div className="col-sm-6">
                                                 <p className="m-b-10 f-w-600">Email</p>
-                                                <h6 className="text-muted f-w-400">{ user.email}</h6>
+                                                <h6 className="text-muted f-w-400">{user.email}</h6>
                                             </div>
                                             <div className="col-sm-6">
                                                 <p className="m-b-10 f-w-600">Phone</p>

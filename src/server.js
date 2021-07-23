@@ -30,12 +30,14 @@ export function makeServer({ environment = "test" } = {}) {
     routes() {
       this.namespace = "api";
 
-      this.get("/users", (schema) => {
+      this.get("/users", (schema, request) => {
+        const { first_name, lastName } = request.queryParams;
+        console.log(first_name , lastName);
         return schema.users.all();
       });
-      this.post("/users", (schema , request) => {
-        let attrs = JSON.parse(request.requestBody)
-        return schema.users.create(attrs)
+      this.post("/users", (schema, request) => {
+        let attrs = JSON.parse(request.requestBody);
+        return schema.users.create(attrs);
       });
       this.get("/users/:id", (schema, request) => {
         let id = request.params.id;
