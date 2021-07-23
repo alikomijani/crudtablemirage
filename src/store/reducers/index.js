@@ -14,4 +14,5 @@ const persistConfig = {
   storage,
 };
 
+export {rootReducer}
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

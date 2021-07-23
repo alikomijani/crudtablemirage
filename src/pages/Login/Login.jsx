@@ -7,12 +7,14 @@ function Login() {
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
     const isLogin = useSelector(state => state.auth.isLogin)
+    const pending = useSelector(state => state.auth.pending)
+    const error = useSelector(state => state.auth.error)
     if (isLogin) {
         return <Redirect to='/' />
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(loginUser({ token: '123', refreshToken: '123', username: username }))
+        dispatch(loginUser({ username: username, password: password }))
     }
     return (
         <div className='container'>
@@ -41,7 +43,10 @@ function Login() {
                                 id="password"
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary mt-4">login</button>
+                        {error && <div class="alert alert-danger mt-4" role="alert">
+                            <strong>{error}</strong>
+                        </div>}
+                        <button disabled={pending} type="submit" className="btn btn-primary mt-4">login</button>
                     </form>
                 </div>
             </div>
